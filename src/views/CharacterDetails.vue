@@ -1,10 +1,35 @@
 <template>
   <div class="justify-center max-w-md mt-10 text-left">
+    <button
+      type="button"
+      class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto hover:bg-gray-100"
+      v-on:click="$router.back()"
+    >
+      <svg
+        class="w-5 h-5 rtl:rotate-180"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+        />
+      </svg>
+      <span>Go back</span>
+    </button>
     <div v-if="!state.isLoading" class="mt-8">
       <div class="max-w-lg mx-auto mb-10 bg-white rounded-lg shadow-md p-5">
         <img
           class="w-32 h-32 rounded-full mx-auto object-cover"
-          v-bind:src="state.characterDetails.image"
+          v-bind:src="
+            state.characterDetails.image.length > 0
+              ? state.characterDetails.image
+              : '../src/assets/image-not-found-icon.svg'
+          "
           alt="Character Image"
         />
         <h2 class="text-center text-2xl font-semibold mt-3">

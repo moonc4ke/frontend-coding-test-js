@@ -3,7 +3,11 @@
     <h1 class="font-extrabold tracking-tigh text-3xl leading-10">
       House of Gryffindor
     </h1>
-    <div v-if="!state.isLoading" class="mt-8">
+    <div v-if="state.isLoading" class="mt-4">Loading...</div>
+    <div v-if="state.error" class="mt-4">
+      Error: failed to retrieve Hogwarts house data, please try again
+    </div>
+    <div v-if="!state.isLoading && !state.error" class="mt-8">
       <section>
         <h2 class="font-bold text-2xl leading-6">
           Characters List of House of Gryffindor
@@ -39,16 +43,14 @@
         </div>
       </section>
     </div>
-    <div v-if="state.isLoading" class="mt-4">Loading...</div>
-    <div v-if="state.error" class="mt-4">
-      An error occurred: {{ state.error.message }}
-    </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, inject } from 'vue'
 import axios from 'axios'
+
+const toast = inject('toast')
 
 const state = reactive({
   characters: [],
@@ -63,9 +65,11 @@ onMounted(async () => {
     )
     state.characters = response.data
     state.isLoading = false
+    toast.addToast('Gryffindor data fetched successfully')
   } catch (error) {
     state.error = error
     state.isLoading = false
+    toast.addToast('Error fetching Gryffindor data', 'error')
   }
 })
 </script>

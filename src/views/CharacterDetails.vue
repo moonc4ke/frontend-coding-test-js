@@ -21,7 +21,11 @@
       </svg>
       <span>Go back</span>
     </button>
-    <div v-if="!state.isLoading" class="mt-8">
+    <div v-if="state.isLoading" class="mt-4">Loading...</div>
+    <div v-if="state.error" class="mt-4">
+      Error: failed to retrieve character data, please try again
+    </div>
+    <div v-if="!state.isLoading && !state.error" class="mt-8">
       <div class="max-w-lg mx-auto mb-10 bg-white rounded-lg shadow-md p-5">
         <img
           class="w-32 h-32 rounded-full mx-auto object-cover"
@@ -119,17 +123,14 @@
         </div>
       </div>
     </div>
-
-    <div v-if="state.isLoading" class="mt-4">Loading...</div>
-    <div v-if="state.error" class="mt-4">
-      An error occurred: {{ state.error.message }}
-    </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, inject } from 'vue'
 import axios from 'axios'
+
+const toast = inject('toast')
 
 const props = defineProps({
   characterId: String,
@@ -151,9 +152,13 @@ onMounted(async () => {
     ;[state.characterDetails] = response.data
 
     state.isLoading = false
+    toast.addToast(
+      `${state.characterDetails.name} character data fetched successfully`,
+    )
   } catch (error) {
     state.error = error
     state.isLoading = false
+    toast.addToast('Error fetching character data', 'error')
   }
 })
 </script>

@@ -7,13 +7,14 @@
       <img
         v-bind:src="state.characterDetails.image"
         alt="Character Image"
-        class="max-w-xs"
+        class="max-w-xs m-auto mb-4"
       />
       <div
         v-if="
           state.characterDetails.alternate_names &&
           state.characterDetails.alternate_names.length > 0
         "
+        class="mb-4"
       >
         <span class="font-semibold">Alternate Names:</span>
         <ul>
@@ -25,65 +26,65 @@
           </li>
         </ul>
       </div>
-      <p>
+      <p class="mb-4">
         <span class="font-semibold">Species:</span>
         {{ state.characterDetails.species }}
       </p>
-      <p>
+      <p class="mb-4">
         <span class="font-semibold">Gender:</span>
         {{ state.characterDetails.gender }}
       </p>
-      <p>
+      <p class="mb-4">
         <span class="font-semibold">House:</span>
         {{ state.characterDetails.house }}
       </p>
-      <p>
+      <p class="mb-4">
         <span class="font-semibold">Date of Birth:</span>
         {{ state.characterDetails.dateOfBirth }}
       </p>
-      <p>
+      <p class="mb-4">
         <span class="font-semibold">Year of Birth:</span>
         {{ state.characterDetails.yearOfBirth }}
       </p>
-      <p>
+      <p class="mb-4">
         <span class="font-semibold">Wizard:</span>
         {{ state.characterDetails.wizard ? 'Yes' : 'No' }}
       </p>
-      <p>
+      <p class="mb-4">
         <span class="font-semibold">Ancestry:</span>
         {{ state.characterDetails.ancestry }}
       </p>
-      <p>
+      <p class="mb-4">
         <span class="font-semibold">Eye Colour:</span>
         {{ state.characterDetails.eyeColour }}
       </p>
-      <p>
+      <p class="mb-4">
         <span class="font-semibold">Hair Colour:</span>
         {{ state.characterDetails.hairColour }}
       </p>
-      <p>
+      <p class="mb-4">
         <span class="font-semibold">Wand:</span>
         {{ state.characterDetails.wand?.wood }} wood,
         {{ state.characterDetails.wand?.core }} core,
         {{ state.characterDetails.wand?.length }} inches
       </p>
-      <p>
+      <p class="mb-4">
         <span class="font-semibold">Patronus:</span>
         {{ state.characterDetails.patronus }}
       </p>
-      <p>
+      <p class="mb-4">
         <span class="font-semibold">Hogwarts Student:</span>
         {{ state.characterDetails.hogwartsStudent ? 'Yes' : 'No' }}
       </p>
-      <p>
+      <p class="mb-4">
         <span class="font-semibold">Hogwarts Staff:</span>
         {{ state.characterDetails.hogwartsStaff ? 'Yes' : 'No' }}
       </p>
-      <p>
+      <p class="mb-4">
         <span class="font-semibold">Actor:</span>
         {{ state.characterDetails.actor }}
       </p>
-      <p>
+      <p class="mb-4">
         <span class="font-semibold">Alive:</span>
         {{ state.characterDetails.alive ? 'Yes' : 'No' }}
       </p>
@@ -115,7 +116,9 @@ onMounted(async () => {
     const response = await axios.get(
       `https://hp-api.onrender.com/api/character/${characterId}`,
     )
-    state.characterDetails = response.data[0]
+
+    ;[state.characterDetails] = response.data
+
     state.isLoading = false
   } catch (error) {
     state.error = error

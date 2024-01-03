@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LayoutMain from '../components/layout/LayoutMain.vue'
 import Error from '../views/Error.vue'
 import Home from '../views/Home.vue'
+import Gryffindor from '../views/Gryffindor.vue'
+import CharacterDetails from '../views/CharacterDetails.vue'
 
 const mainRoutes = [
   {
@@ -9,6 +11,18 @@ const mainRoutes = [
     name: 'Home',
     props: true,
     component: Home,
+  },
+  {
+    path: '/gryffindor',
+    name: 'Gryffindor',
+    props: true,
+    component: Gryffindor,
+  },
+  {
+    path: '/character/:characterId',
+    name: 'CharacterDetails',
+    props: true,
+    component: CharacterDetails,
   },
 ]
 
@@ -22,7 +36,6 @@ const routes = [
   },
   {
     path: '/',
-    props: true,
     component: LayoutMain,
     children: mainRoutes,
   },

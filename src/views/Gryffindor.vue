@@ -8,22 +8,35 @@
         <h2 class="font-bold text-2xl leading-6">
           Characters List of House of Gryffindor
         </h2>
-        <ul class="mt-4 mb-4">
-          <li
-            v-for="character in state.characters"
-            v-bind:key="character.id"
-            class="hover:underline"
-          >
-            <router-link
-              v-bind:to="{
-                name: 'CharacterDetails',
-                params: { characterId: character.id },
-              }"
-            >
-              {{ character.name }}
-            </router-link>
-          </li>
-        </ul>
+
+        <div class="min-h-screen flex items-center justify-center px-16">
+          <div class="relative w-full max-w-lg">
+            <div class="m-8 relative space-y-4">
+              <ul class="mt-4 mb-4">
+                <li
+                  v-for="character in state.characters"
+                  v-bind:key="character.id"
+                  class="mb-3 hover:underline"
+                >
+                  <router-link
+                    v-bind:to="{
+                      name: 'CharacterDetails',
+                      params: { characterId: character.id },
+                    }"
+                  >
+                    <div
+                      class="p-5 bg-white rounded-lg flex items-center justify-between space-x-8"
+                    >
+                      <div class="flex-1 flex justify-between items-center">
+                        {{ character.name }}
+                      </div>
+                    </div>
+                  </router-link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
     <div v-if="state.isLoading" class="mt-4">Loading...</div>

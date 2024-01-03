@@ -1,94 +1,100 @@
 <template>
-  <div class="justify-center max-w-md mt-10">
-    <h1 class="font-extrabold tracking-tigh text-3xl leading-10">
-      {{ state.characterDetails.name }}
-    </h1>
+  <div class="justify-center max-w-md mt-10 text-left">
     <div v-if="!state.isLoading" class="mt-8">
-      <img
-        v-bind:src="state.characterDetails.image"
-        alt="Character Image"
-        class="max-w-xs m-auto mb-4"
-      />
-      <div
-        v-if="
-          state.characterDetails.alternate_names &&
-          state.characterDetails.alternate_names.length > 0
-        "
-        class="mb-4"
-      >
-        <span class="font-semibold">Alternate Names:</span>
-        <ul>
-          <li
-            v-for="name in state.characterDetails.alternate_names"
-            v-bind:key="name"
-          >
-            {{ name }}
-          </li>
-        </ul>
+      <div class="max-w-lg mx-auto mb-10 bg-white rounded-lg shadow-md p-5">
+        <img
+          class="w-32 h-32 rounded-full mx-auto object-cover"
+          v-bind:src="state.characterDetails.image"
+          alt="Character Image"
+        />
+        <h2 class="text-center text-2xl font-semibold mt-3">
+          {{ state.characterDetails.name }}
+        </h2>
+        <div
+          v-if="
+            state.characterDetails.alternate_names &&
+            state.characterDetails.alternate_names.length > 0
+          "
+          class="text-center text-gray-600 mt-1"
+        >
+          <span class="font-semibold">AKA:</span>
+          <ul>
+            <li
+              v-for="name in state.characterDetails.alternate_names"
+              v-bind:key="name"
+            >
+              {{ name }}
+            </li>
+          </ul>
+        </div>
+        <div class="mt-5">
+          <h3 class="text-xl font-semibold">Details</h3>
+          <p class="text-gray-600 mt-2">
+            <span class="font-semibold">Species:</span>
+            {{ state.characterDetails.species }}
+          </p>
+          <p class="text-gray-600 mt-2">
+            <span class="font-semibold">Gender:</span>
+            {{ state.characterDetails.gender }}
+          </p>
+          <p class="text-gray-600 mt-2">
+            <span class="font-semibold">House:</span>
+            {{ state.characterDetails.house }}
+          </p>
+          <p class="text-gray-600 mt-2">
+            <span class="font-semibold">Date of Birth:</span>
+            {{ state.characterDetails.dateOfBirth }}
+          </p>
+          <p class="text-gray-600 mt-2">
+            <span class="font-semibold">Year of Birth:</span>
+            {{ state.characterDetails.yearOfBirth }}
+          </p>
+          <p class="text-gray-600 mt-2">
+            <span class="font-semibold">Wizard:</span>
+            {{ state.characterDetails.wizard ? 'Yes' : 'No' }}
+          </p>
+          <p class="text-gray-600 mt-2">
+            <span class="font-semibold">Ancestry:</span>
+            {{ state.characterDetails.ancestry }}
+          </p>
+          <p class="text-gray-600 mt-2">
+            <span class="font-semibold">Eye Colour:</span>
+            {{ state.characterDetails.eyeColour }}
+          </p>
+          <p class="text-gray-600 mt-2">
+            <span class="font-semibold">Hair Colour:</span>
+            {{ state.characterDetails.hairColour }}
+          </p>
+          <p class="text-gray-600 mt-2">
+            <span class="font-semibold">Wand:</span>
+            {{ state.characterDetails.wand?.wood }} wood,
+            {{ state.characterDetails.wand?.core }} core,
+            {{ state.characterDetails.wand?.length }} inches
+          </p>
+          <p class="text-gray-600 mt-2">
+            <span class="font-semibold">Patronus:</span>
+            {{ state.characterDetails.patronus }}
+          </p>
+          <p class="text-gray-600 mt-2">
+            <span class="font-semibold">Hogwarts Student:</span>
+            {{ state.characterDetails.hogwartsStudent ? 'Yes' : 'No' }}
+          </p>
+          <p class="text-gray-600 mt-2">
+            <span class="font-semibold">Hogwarts Staff:</span>
+            {{ state.characterDetails.hogwartsStaff ? 'Yes' : 'No' }}
+          </p>
+          <p class="text-gray-600 mt-2">
+            <span class="font-semibold">Actor:</span>
+            {{ state.characterDetails.actor }}
+          </p>
+          <p class="text-gray-600 mt-2">
+            <span class="font-semibold">Alive:</span>
+            {{ state.characterDetails.alive ? 'Yes' : 'No' }}
+          </p>
+        </div>
       </div>
-      <p class="mb-4">
-        <span class="font-semibold">Species:</span>
-        {{ state.characterDetails.species }}
-      </p>
-      <p class="mb-4">
-        <span class="font-semibold">Gender:</span>
-        {{ state.characterDetails.gender }}
-      </p>
-      <p class="mb-4">
-        <span class="font-semibold">House:</span>
-        {{ state.characterDetails.house }}
-      </p>
-      <p class="mb-4">
-        <span class="font-semibold">Date of Birth:</span>
-        {{ state.characterDetails.dateOfBirth }}
-      </p>
-      <p class="mb-4">
-        <span class="font-semibold">Year of Birth:</span>
-        {{ state.characterDetails.yearOfBirth }}
-      </p>
-      <p class="mb-4">
-        <span class="font-semibold">Wizard:</span>
-        {{ state.characterDetails.wizard ? 'Yes' : 'No' }}
-      </p>
-      <p class="mb-4">
-        <span class="font-semibold">Ancestry:</span>
-        {{ state.characterDetails.ancestry }}
-      </p>
-      <p class="mb-4">
-        <span class="font-semibold">Eye Colour:</span>
-        {{ state.characterDetails.eyeColour }}
-      </p>
-      <p class="mb-4">
-        <span class="font-semibold">Hair Colour:</span>
-        {{ state.characterDetails.hairColour }}
-      </p>
-      <p class="mb-4">
-        <span class="font-semibold">Wand:</span>
-        {{ state.characterDetails.wand?.wood }} wood,
-        {{ state.characterDetails.wand?.core }} core,
-        {{ state.characterDetails.wand?.length }} inches
-      </p>
-      <p class="mb-4">
-        <span class="font-semibold">Patronus:</span>
-        {{ state.characterDetails.patronus }}
-      </p>
-      <p class="mb-4">
-        <span class="font-semibold">Hogwarts Student:</span>
-        {{ state.characterDetails.hogwartsStudent ? 'Yes' : 'No' }}
-      </p>
-      <p class="mb-4">
-        <span class="font-semibold">Hogwarts Staff:</span>
-        {{ state.characterDetails.hogwartsStaff ? 'Yes' : 'No' }}
-      </p>
-      <p class="mb-4">
-        <span class="font-semibold">Actor:</span>
-        {{ state.characterDetails.actor }}
-      </p>
-      <p class="mb-4">
-        <span class="font-semibold">Alive:</span>
-        {{ state.characterDetails.alive ? 'Yes' : 'No' }}
-      </p>
     </div>
+
     <div v-if="state.isLoading" class="mt-4">Loading...</div>
     <div v-if="state.error" class="mt-4">
       An error occurred: {{ state.error.message }}
